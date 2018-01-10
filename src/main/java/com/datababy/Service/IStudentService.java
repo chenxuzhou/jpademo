@@ -37,10 +37,9 @@ public interface IStudentService {
     /**
      *
      * @param pageParm
-     * @param pageable
      * @return Page<Student>
      */
-    public Page<Student> pageStudentName(PageParm pageParm, Pageable pageable);
+    public Page<Student> pageStudentName(PageParm pageParm);
 
     /**
      * //查询所有

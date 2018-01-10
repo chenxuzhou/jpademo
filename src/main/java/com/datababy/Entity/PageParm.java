@@ -1,6 +1,10 @@
 package com.datababy.Entity;
 
 public class PageParm {
+    private Integer page=0;
+
+    private Integer size=10;
+
     private Integer id;//学生id
 
     private String user_name;//学生姓名
@@ -8,6 +12,30 @@ public class PageParm {
     private String major;//学生专业
 
     public PageParm() {
+    }
+
+    public PageParm(Integer page, Integer size, Integer id, String user_name, String major) {
+        this.page = page;
+        this.size = size;
+        this.id = id;
+        this.user_name = user_name;
+        this.major = major;
+    }
+
+    public Integer getPage() {
+        return page/size;
+    }
+
+    public void setPage(Integer page) {
+        this.page = page;
+    }
+
+    public Integer getSize() {
+        return size;
+    }
+
+    public void setSize(Integer size) {
+        this.size = size;
     }
 
     public Integer getId() {

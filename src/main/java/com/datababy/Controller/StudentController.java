@@ -67,34 +67,9 @@ public class StudentController {
      *  @param   pageParm
      * @return Page<Student>
      */
-//    @PostMapping("/pageQuery")
-//    public Page<Student> queryPageStudents(@RequestBody PageParm pageParm){
-//
-//        Sort sort=new Sort(Sort.Direction.ASC,"id");
-//        Pageable pageable=new PageRequest(pageParm.getPage(),pageParm.getSize(),sort);
-//            if ("".equals(pageParm.getName())&&
-//                "".equals(pageParm.getCollege())&&
-//                "".equals(pageParm.getCollege())&&
-//                "".equals(pageParm.getId())||
-//                    pageParm.getId()==null&&
-//                    pageParm.getMajor()==null&&
-//                    pageParm.getCollege()==null &&
-//                    pageParm.getName()==null){
-//            return iStudentService.getStudents1(pageable);
-//        }else{
-//            return iStudentService.pageStudentName(pageParm,pageable);
-//        }
-//  }
-
     @PostMapping("/pageQuery")
-    public Page<Student> queryPageStudents( @RequestParam(value = "page",defaultValue = "0") Integer page,
-                                            @RequestParam(value = "size",defaultValue = "5") Integer size,
-                                            PageParm pageParm) {
-
-                    Sort sort=new Sort(Sort.Direction.ASC,"id");
-                    Pageable pageable=new PageRequest((page/size),size,sort);
-
-            return iStudentService.pageStudentName(pageParm,pageable);
+    public Page<Student> queryPageStudents(@RequestBody PageParm pageParm) {
+            return iStudentService.pageStudentName(pageParm);
                     }
 
 

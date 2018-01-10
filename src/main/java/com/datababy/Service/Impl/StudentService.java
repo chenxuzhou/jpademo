@@ -6,7 +6,9 @@ import com.datababy.Service.IStudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import  com.datababy.Entity.Student;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -64,45 +66,32 @@ public class StudentService implements IStudentService {
 
     /**
      * 分页查询（根据学生姓名,id,学院,专业）
-     * @param
-     * @param pageable
+     * @param  pageParm
      * @return
      */
-    public Page<Student> pageStudentName(PageParm pageParm, Pageable pageable){
-//       Page<Student> page= studentDaoRepository.findAll(new Specification<Student>(){
-//
-//            @Override
-//            public Predicate toPredicate(Root<Student> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
-//                Predicate p1 = criteriaBuilder.equal(root.get("user_name").as(String.class), pageParm.getName());
-//                Predicate p2 = criteriaBuilder.equal(root.get("college").as(String.class), pageParm.getCollege());
-//                Predicate p3 = criteriaBuilder.equal(root.get("major").as(String.class), pageParm.getMajor());
-//                Predicate p4 = criteriaBuilder.equal(root.get("id").as(String.class),pageParm.getId());
-//                criteriaQuery.where(criteriaBuilder.or(p1,p2,p3,p4));
-//                return criteriaQuery.getRestriction();
-//
-//            }
-//        },pageable);
-//
-//       return page;
+    public Page<Student> pageStudentName(PageParm pageParm){
 
         Specification<Student> specification=new Specification<Student>() {
             @Override
             public Predicate toPredicate(Root<Student> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder cb) {
                 List<Predicate> predicates=new ArrayList<>();
                 if(null != pageParm.getId()){ //添加断言
-                    Predicate likeId = cb.like(root.get("id").as(String.class),pageParm.getId()+"%");
+                    Predicate likeId = cb.like(root.get("id").as(String.class),"%"+pageParm.getId()+"%");
                     predicates.add(likeId);
-                }else if (null != pageParm.getUser_name()){
-                    Predicate likeName =cb.like(root.get("user_name").as(String.class),pageParm.getUser_name()+"%");
+                }if (null != pageParm.getUser_name()){
+                    Predicate likeName =cb.like(root.get("user_name").as(String.class),"%"+pageParm.getUser_name()+"%");
                     predicates.add(likeName);
-                }else if (null !=pageParm.getMajor()){
-                    Predicate likeMajor=cb.like(root.get("major").as(String.class),pageParm.getMajor()+"%");
+                }if (null !=pageParm.getMajor()){
+                    Predicate likeMajor=cb.like(root.get("major").as(String.class),"%"+pageParm.getMajor()+"%");
                     predicates.add(likeMajor);
                 }
+
 
             return cb.and(predicates.toArray(new Predicate[0]));
             }
         };
+        Sort sort=new Sort(Sort.Direction.ASC,"id");
+        Pageable pageable=new PageRequest(pageParm.getPage(),pageParm.getSize(),sort);
         return this.studentDaoRepository.findAll(specification,pageable);
     }
 
