@@ -2,7 +2,6 @@ spring:
   jpa:
     show-sql: true
 
-
 c3p0:
     jdbcUrl: jdbc:mysql://127.0.0.1:3306/db_tcm?useUnicode=true&characterEncoding=utf8&autoReconnect=true&failOverReadOnly=false
     user: root
@@ -19,4 +18,5 @@ c3p0:
     acquireRetryDelay: 1000
     breakAfterAcquireFailure: false
     testConnectionOnCheckout: false
+
 

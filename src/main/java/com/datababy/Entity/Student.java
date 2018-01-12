@@ -13,7 +13,7 @@ public class Student {
     @GeneratedValue
     private Integer id;
 
-    private String user_name;
+    private String name;
 
     private Integer grade;
 
@@ -30,9 +30,9 @@ public class Student {
     public Student() {
     }
 
-    public Student(Integer id, String user_name, Integer grade, Date birth, String major, String college, Date entry_date) {
+    public Student(Integer id, String name, Integer grade, Date birth, String major, String college, Date entry_date) {
         this.id = id;
-        this.user_name = user_name;
+        this.name = name;
         this.grade = grade;
         this.birth = birth;
         this.major = major;
@@ -48,12 +48,12 @@ public class Student {
         this.id = id;
     }
 
-    public String getUser_name() {
-        return user_name;
+    public String getName() {
+        return name;
     }
 
-    public void setUser_name(String user_name) {
-        this.user_name = user_name;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Integer getGrade() {

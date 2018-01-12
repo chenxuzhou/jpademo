@@ -5,6 +5,8 @@ public class PageParm {
 
     private Integer size=10;
 
+    private String parm;//全局查询条件
+
     private Integer id;//学生id
 
     private String user_name;//学生姓名
@@ -14,12 +16,21 @@ public class PageParm {
     public PageParm() {
     }
 
-    public PageParm(Integer page, Integer size, Integer id, String user_name, String major) {
+    public PageParm(Integer page, Integer size, String parm, Integer id, String user_name, String major) {
         this.page = page;
         this.size = size;
+        this.parm = parm;
         this.id = id;
         this.user_name = user_name;
         this.major = major;
+    }
+
+    public String getParm() {
+        return parm;
+    }
+
+    public void setParm(String parm) {
+        this.parm = parm;
     }
 
     public Integer getPage() {
